@@ -4,7 +4,7 @@ Eternal Algorithm is a simple neural network designed to determine the sentiment
 
 ## Usage
 
-To use Eternal Algorithm, simply pass in a sentence as a string, and the neural network will determine whether the sentiment of the sentence is positive, negative, or neutral. The output will be returned as a string with one of the following values: "positive", "negative", or "neutral".
+To use Eternal Algorithm, simply pass in a sentence as a string, and the neural network will determine whether the sentiment of the sentence is positive, negative, or neutral. The output will be returned as a string with one of the following values: "positive", "negative".
 
 ## Development
 
