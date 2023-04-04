@@ -36,17 +36,17 @@ class Provider:
         data = [sentence]
         preds = self.make_predicts(data)
         if preds is None:
-            return "Модель не обучена. Пожалуйста обучите модель."
+            return "Model not found, Please train model"
         if np.max(preds) < self.threshold:
-            return f"Не удалось определить ответ. Возможно я не знаю такое предложение. :/ \nPreds: {preds}"
+            return f"Could not determine the answer. Perhaps I do not know such a proposal. :/ \nPreds: {preds}"
         else:
             class_idx = np.argmax(preds)
             if class_idx == 0:
-                sentiment = 'негативное'
+                sentiment = 'negative'
             else:
-                sentiment = 'позитивное'
+                sentiment = 'positive'
             # вывод вероятности и предсказанного класса
-            return f'Предложение "{sentence}" - {sentiment} ({preds[0][class_idx]:.2f})\nPreds: {preds}'
+            return f'Sentence "{sentence}" - {sentiment} ({preds[0][class_idx]:.2f})\nPreds: {preds}'
 
     def reload_model(self):
         self.model = None

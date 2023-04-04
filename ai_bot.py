@@ -27,7 +27,7 @@ async def predict(ctx: discord.ApplicationContext, phrase: str):
     await ctx.respond(provider.predict_sentiment(phrase))
 
 
-@bot.slash_command(name="insert")
+@bot.slash_command(name="insert", description="Inserts phrase and value to dataset: 0 - negative, 1 - positive")
 async def insert(ctx: discord.ApplicationContext, phrase: str, value: int):
     if ctx.author.id == bot_dev:
         if value == 1 or value == 0:
@@ -40,7 +40,7 @@ async def insert(ctx: discord.ApplicationContext, phrase: str, value: int):
         await ctx.respond("You are not allowed to do this!")
 
 
-@bot.slash_command(name="start")
+@bot.slash_command(name="start", description="Starts training model")
 async def start(ctx: discord.ApplicationContext):
     if ctx.author.id == bot_dev:
         await ctx.respond("Training started!")
@@ -53,13 +53,13 @@ async def start(ctx: discord.ApplicationContext):
 
 
 async def callback_train(ctx: discord.ApplicationContext):
-    embed = discord.Embed(title='Результаты обучения нейросети', color=0x9652f9)
+    embed = discord.Embed(title='Model training result', color=0x9652f9)
     loss = trainer.get_history()["loss"]
     accuracy = trainer.get_history()["accuracy"]
     # Добавляем поля для каждой эпохи
     for i in range(len(loss)):
         epoch_num = i + 1
-        embed.add_field(name=f'Эпоха {epoch_num}', value=f'Loss: {loss[i]}\nAccuracy: {accuracy[i]}', inline=False)
+        embed.add_field(name=f'Epoch {epoch_num}', value=f'Loss: {loss[i]}\nAccuracy: {accuracy[i]}', inline=False)
     await ctx.respond(embed=embed)
 
 bot.run(bot_token)

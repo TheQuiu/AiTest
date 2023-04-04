@@ -62,10 +62,10 @@ class Trainer:
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         self.history = model.fit(x_train, y_train, epochs=12, batch_size=1)
         model.save(self.model_path)
-        return "Модель обучена."
+        return "Model trained"
 
     def get_history(self):
         if self.history is None:
-            return "Модель не обучена. Пожалуйста обучите модель."
+            return "Model not trained"
         else:
             return self.history.history
