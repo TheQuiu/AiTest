@@ -1,0 +1,5 @@
+numpy==1.23.5
+tensorflow==2.12.0rc1
+tensorflow-estimator==2.12.0rc0
+tensorflow-intel==2.12.0rc1
+tensorflow-io-gcs-filesystem==0.31.0
