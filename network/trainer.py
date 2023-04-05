@@ -60,7 +60,7 @@ class Trainer:
             keras.layers.Dense(2, activation='sigmoid')
         ])
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-        self.history = model.fit(x_train, y_train, epochs=12, batch_size=1)
+        self.history = model.fit(x_train, y_train, epochs=13, batch_size=1)
         model.save(self.model_path)
         return "Model trained"
 

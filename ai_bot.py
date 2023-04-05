@@ -8,14 +8,17 @@ from loguru import logger
 from network.provider import Provider
 from network.tokenizer.tokenizer import AiTokenizer
 from network.trainer import Trainer
+
 load_dotenv()
 tokenizer = AiTokenizer()
 trainer = Trainer(tokenizer)
 provider = Provider(tokenizer)
 
 bot = commands.Bot(command_prefix="%", intents=discord.Intents.all())
-bot_dev = os.getenv("BOT_DEV")
+bot_dev = 802219001383616552
 bot_token = os.getenv("BOT_TOKEN")
+
+
 @bot.event
 async def on_ready():
     logger.info("Bot is ready!")
@@ -29,7 +32,7 @@ async def predict(ctx: discord.ApplicationContext, phrase: str):
 
 @bot.slash_command(name="insert", description="Inserts phrase and value to dataset: 0 - negative, 1 - positive")
 async def insert(ctx: discord.ApplicationContext, phrase: str, value: int):
-    if ctx.author.id == bot_dev:
+    if ctx.author.id == int(bot_dev):
         if value == 1 or value == 0:
             with open('dataset/data.txt', 'a', encoding="UTF-8") as f:
                 f.write(f"{phrase.lower()} % {value}\n")
@@ -42,7 +45,7 @@ async def insert(ctx: discord.ApplicationContext, phrase: str, value: int):
 
 @bot.slash_command(name="start", description="Starts training model")
 async def start(ctx: discord.ApplicationContext):
-    if ctx.author.id == bot_dev:
+    if ctx.author.id == 802219001383616552:
         await ctx.respond("Training started!")
         task = asyncio.create_task(trainer.train())  # запускаем асинхронную функцию
         await task
@@ -61,5 +64,6 @@ async def callback_train(ctx: discord.ApplicationContext):
         epoch_num = i + 1
         embed.add_field(name=f'Epoch {epoch_num}', value=f'Loss: {loss[i]}\nAccuracy: {accuracy[i]}', inline=False)
     await ctx.respond(embed=embed)
+
 
 bot.run(bot_token)
