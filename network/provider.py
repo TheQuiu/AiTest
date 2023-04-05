@@ -38,7 +38,7 @@ class Provider:
         if preds is None:
             return "Model not found, Please train model"
         if np.max(preds) < self.threshold:
-            return f"Could not determine the answer. Perhaps I do not know such a proposal. :/ \nPreds: {preds}"
+            return f"Could not determine the answer. Perhaps I do not know a phrase like this. :/ \nPreds: {preds}"
         else:
             class_idx = np.argmax(preds)
             if class_idx == 0:
