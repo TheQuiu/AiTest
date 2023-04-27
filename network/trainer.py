@@ -56,13 +56,14 @@ class Trainer:
         model = keras.Sequential([
             keras.layers.Embedding(1000, 16, input_length=1000),
             keras.layers.Flatten(),
-            keras.layers.Dense(32, activation='relu'),
+            keras.layers.Dense(64, activation='relu'),
+            keras.layers.Dense(64, activation='relu'),
             keras.layers.Dense(2, activation='sigmoid')
         ])
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-        self.history = model.fit(x_train, y_train, epochs=13, batch_size=1)
+        self.history = model.fit(x_train, y_train, epochs=15, batch_size=5)
         model.save(self.model_path)
-        return "Model trained"
+        return "Model trained!"
 
     def get_history(self):
         if self.history is None:
